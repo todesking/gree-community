@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 require 'uri'
 require 'mechanize'
 
@@ -9,6 +11,7 @@ module GREE
       end
       attr_reader :id
       attr_reader :recent_comments
+      attr_reader :title
       def uri
         URI.parse(
           "http://gree.jp/?mode=community&act=bbs_view&thread_id=#{self.id}"
@@ -16,15 +19,16 @@ module GREE
       end
       def fetch(fetcher)
         page=fetcher.get(self.uri)
+        @title = page.at('.title').text
         @recent_comments = page.search('.comment-list li').map{|comment|
           id = comment.attr(:id)
           body = comment.
             at('.item').
-            children[3..-8]
+            children[3..-1]
           Comment.new(
             id,
             user_name: comment.at('.item strong').text,
-            body_text: body.map{|elm| elm.name == 'br' ? "\n" : elm.text }.join(' '),
+            body_text: body.map{|elm| elm.name == 'br' ? "\n" : elm.text }.join('').gsub(//,''),
             time: Time.strptime(comment.at('.shoulder .timestamp').text, '%m/%d %H:%M'),
           )
         }
