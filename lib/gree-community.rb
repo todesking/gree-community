@@ -57,7 +57,10 @@ module GREE
       end
       def get(uri)
         raise "invalid arg" unless uri.host == 'gree.jp'
+        page_encoding = 'EUC-JP-MS'
+
         page = @agent.get(uri)
+        page.encoding = page_encoding
         unless page.uri == uri
           login_form = page.form_with(name: 'login')
           raise "Login form not found: uri=#{uri} redirected=#{page.uri}" unless login_form
@@ -69,6 +72,7 @@ module GREE
           login_form.submit
 
           page = @agent.page
+          page.encoding = page_encoding
 
           raise "Login failed or something: uri=#{uri} login=#{login_uri} last=#{page.uri}" unless page.uri == uri
         end
