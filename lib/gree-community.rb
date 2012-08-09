@@ -21,7 +21,7 @@ module GREE
         page=fetcher.get(self.uri)
         @title = page.at('.title').text
         @recent_comments = page.search('.comment-list li').map{|comment|
-          id = comment.attr(:id)
+          id = Integer(comment.attr(:id))
           body = comment.
             at('.item').
             children[3..-1]
