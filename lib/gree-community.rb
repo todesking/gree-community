@@ -5,9 +5,34 @@ require 'mechanize'
 
 module GREE
   class Community
+    def initialize id
+      @id=id
+    end
+    attr_reader :id
+    attr_reader :recent_threads
+    def recent_threads_uri
+      URI.parse(
+        "http://gree.jp/?mode=community&act=bbs_list&community_id=#{id}"
+      )
+    end
+    def fetch(fetcher)
+      page=fetcher.get(recent_threads_uri)
+      @recent_threads=page.search('.feed .item').map{|item|
+        thread_uri = item.at('.head a').attr(:href)
+        thread_uri =~ /&thread_id=(\d+)/
+        thread_id = Integer($1)
+        thread_title = item.at('.head a strong').text
+        Thread.new(
+          thread_id,
+          title: thread_title,
+        )
+      }
+    end
     class Thread
-      def initialize(id)
+      def initialize(id,values={})
         @id=id
+        @recent_comments=values[:recent_comments]
+        @title=values[:title]
       end
       attr_reader :id
       attr_reader :recent_comments
@@ -35,7 +60,7 @@ module GREE
         nil
       end
       class Comment
-        def initialize id, values={}
+        def initialize(id, values={})
           @id=id
           @body_text = values[:body_text]
           @user_name = values[:user_name]
