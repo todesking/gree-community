@@ -1,6 +1,6 @@
 # gree-community
 
-This gem add Enumerable#weighted_sample_by mehtod.
+Access to GREE community.
 
 ## Installation
 
@@ -35,11 +35,6 @@ Or install it yourself as:
     end
 
 See source for details.
-
-### Restrictions
-
-* Weight is zero or positive Integer(Negative or Float is not allowed).
-* Sum of weights should > 0
 
 ## Contributing
 
