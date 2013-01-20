@@ -46,10 +46,14 @@ See source for details.
 
 ## Changes
 
+### 0.0.3(unreleased)
+
+* Update Gemfile.
+
 ### 0.0.2
 
-Add missing dependency.
+* Add missing dependency.
 
 ### 0.0.1
 
-Initial release.
+* Initial release.
