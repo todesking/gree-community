@@ -49,6 +49,7 @@ See source for details.
 ### 0.0.3(unreleased)
 
 * Update Gemfile.
+* Add license
 
 ### 0.0.2
 
