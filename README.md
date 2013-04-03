@@ -46,6 +46,10 @@ See source for details.
 
 ## Changes
 
+### 0.0.4
+
+* Thread::Comment#user_id could be nil.
+
 ### 0.0.3
 
 * Update Gemfile.

@@ -53,7 +53,7 @@ module GREE
           Comment.new(
             id,
             user_name: comment.at('.item strong a').text,
-            user_id:   comment.at('.item strong a').attr(:href).match(%r{gree\.jp/(\d+)})[1],
+            user_id:   comment.at('.item strong a').attr(:href).match(%r{gree\.jp/(\d+)}) ? $1 : nil,
             body_text: body.map{|elm| elm.name == 'br' ? "\n" : elm.text }.join('').gsub(//,''),
             time:      Time.strptime(comment.at('.shoulder .timestamp').text, '%m/%d %H:%M'),
           )

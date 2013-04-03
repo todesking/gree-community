@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "gree-community"
-  gem.version       = "0.0.3"
+  gem.version       = "0.0.4"
   gem.authors       = ["todesking"]
   gem.email         = ["discommunicative@gmail.com"]
   gem.summary       = %q{Access to GREE community.}
