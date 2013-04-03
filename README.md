@@ -46,7 +46,7 @@ See source for details.
 
 ## Changes
 
-### 0.0.3(unreleased)
+### 0.0.3
 
 * Update Gemfile.
 * Add license
