@@ -50,6 +50,7 @@ See source for details.
 
 * Update Gemfile.
 * Add license
+* Add Thread::Comment#user_id
 
 ### 0.0.2
 

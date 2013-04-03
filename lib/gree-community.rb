@@ -52,9 +52,10 @@ module GREE
             children[3..-1]
           Comment.new(
             id,
-            user_name: comment.at('.item strong').text,
+            user_name: comment.at('.item strong a').text,
+            user_id:   comment.at('.item strong a').attr(:href).match(%r{gree\.jp/(\d+)})[1],
             body_text: body.map{|elm| elm.name == 'br' ? "\n" : elm.text }.join('').gsub(//,''),
-            time: Time.strptime(comment.at('.shoulder .timestamp').text, '%m/%d %H:%M'),
+            time:      Time.strptime(comment.at('.shoulder .timestamp').text, '%m/%d %H:%M'),
           )
         }
         nil
@@ -64,9 +65,11 @@ module GREE
           @id=id
           @body_text = values[:body_text]
           @user_name = values[:user_name]
+          @user_id = values[:user_id]
           @time = values[:time]
         end
         attr_reader :id
+        attr_reader :user_id
         attr_reader :user_name
         attr_reader :body_text
         attr_reader :time
