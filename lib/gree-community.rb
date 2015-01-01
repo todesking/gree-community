@@ -85,7 +85,7 @@ module GREE
       end
       def get(uri)
         raise "invalid arg" unless uri.host == 'gree.jp'
-        page_encoding = 'EUC-JP-MS'
+        page_encoding = 'UTF-8'
 
         page = @agent.get(uri)
         page.encoding = page_encoding
