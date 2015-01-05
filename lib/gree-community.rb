@@ -93,6 +93,7 @@ module GREE
           login_form = page.forms[0]
           raise "Login form not found: uri=#{uri} redirected=#{page.uri}" unless login_form
 
+          page_encoding = 'EUC-JP-MS'
           login_uri = page.uri
 
           login_form.mail = @user_id
